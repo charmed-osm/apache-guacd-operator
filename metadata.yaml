@@ -1,0 +1,22 @@
+# Copyright 2021 Canonical Ltd.
+# See LICENSE file for licensing details.
+
+name: davigar15-apache-guacd
+display-name: Apache Guacd
+description: |
+  guacd is the native server-side proxy used by the Apache Guacamole
+  web application. If you wish to deploy Guacamole, or an application
+  using the Guacamole core APIs, you will need a copy of guacd running.
+
+summary: |
+  The native server-side proxy used by Apache Guacamole.
+
+containers:
+  guacd:
+    resource: guacd-image
+
+resources:
+  guacd-image:
+    type: oci-image
+    description: OCI image for Apache Guacd
+    upstream-source: guacamole/guacd:1.3.0

@@ -3,6 +3,7 @@ See LICENSE file for licensing details. -->
 
 # Apache Guacd Operator
 
+[![codecov](https://codecov.io/gh/davigar15/charm-apache-guacd/branch/main/graph/badge.svg?token=MA9XWOB018)](https://codecov.io/gh/davigar15/charm-apache-guacd)
 [![code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black/tree/main)
 [![Run-Tests](https://github.com/davigar15/charm-apache-guacd/actions/workflows/ci.yaml/badge.svg)](https://github.com/davigar15/charm-apache-guacd/actions/workflows/ci.yaml)
 

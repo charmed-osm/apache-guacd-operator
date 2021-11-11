@@ -5,22 +5,16 @@
 """Apache Guacd charm module."""
 
 import logging
-import subprocess
-from ipaddress import IPv4Address
-from typing import Optional
 
+from charms.davigar15_apache_guacd.v0 import guacd
 from ops.charm import CharmBase, ConfigChangedEvent, WorkloadEvent
 from ops.framework import StoredState
 from ops.main import main
-from ops.model import ActiveStatus, BlockedStatus, MaintenanceStatus
+from ops.model import ActiveStatus, MaintenanceStatus
 
 logger = logging.getLogger(__name__)
 
 REQUIRED_CONFIG = ()
-
-
-class CharmError(Exception):
-    """Charm exception error."""
 
 
 class ApacheGuacdCharm(CharmBase):
@@ -36,7 +30,7 @@ class ApacheGuacdCharm(CharmBase):
         }
         for event, observer in event_observe_mapping.items():
             self.framework.observe(event, observer)
-        self._stored.set_default(unit_ip=None)
+        self.guacd = guacd.GuacdProvides(self)
 
     @property
     def container(self):
@@ -47,13 +41,6 @@ class ApacheGuacdCharm(CharmBase):
     def services(self):
         """Property to get the services in the container plan."""
         return self.container.get_plan().services
-
-    @property
-    def pod_ip(self) -> Optional[IPv4Address]:  # pragma: no cover
-        """Pod's IP address."""
-        return IPv4Address(
-            subprocess.check_output(["unit-get", "private-address"]).decode().strip()
-        )
 
     def _on_guacd_pebble_ready(self, _: WorkloadEvent):
         self._restart()
@@ -67,16 +54,10 @@ class ApacheGuacdCharm(CharmBase):
             self.unit.status = MaintenanceStatus("waiting for pebble to start")
 
     def _restart(self):
-        try:
-            if not self.pod_ip:
-                raise CharmError("missing unit ip")
-            layer = self._get_pebble_layer()
-            self._set_pebble_layer(layer)
-            self._restart_service()
-            self.unit.status = ActiveStatus()
-        except CharmError as e:
-            logger.info(f"Charm entered to BlockedStatus. Reason: {e}")
-            self.unit.status = BlockedStatus(str(e))
+        layer = self._get_pebble_layer()
+        self._set_pebble_layer(layer)
+        self._restart_service()
+        self.unit.status = ActiveStatus()
 
     def _restart_service(self):
         container = self.container
@@ -92,7 +73,7 @@ class ApacheGuacdCharm(CharmBase):
                 "guacd": {
                     "override": "replace",
                     "summary": "guacd service",
-                    "command": f"/usr/local/guacamole/sbin/guacd -b {self.pod_ip} -L info -f",
+                    "command": f"/usr/local/guacamole/sbin/guacd -b {guacd.pod_ip()} -L info -f",
                     "startup": "enabled",
                     "environment": {
                         "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",

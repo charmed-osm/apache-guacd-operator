@@ -20,3 +20,7 @@ resources:
     type: oci-image
     description: OCI image for Apache Guacd
     upstream-source: guacamole/guacd:1.3.0
+
+provides:
+  guacd:
+    interface: guacd

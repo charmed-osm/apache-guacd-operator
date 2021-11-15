@@ -12,7 +12,7 @@ See LICENSE file for licensing details. -->
 
 ## Description
 
-The native server-side proxy used by Apache Guacamole.
+The native server-side proxy used by [Apache Guacamole](https://charmhub.io/davigar15-apache-guacamole).
 
 Guacd is the native server-side proxy used by the Apache Guacamole web application. If you wish to deploy Guacamole, or an application using the Guacamole core APIs, you will need a copy of guacd running.
 

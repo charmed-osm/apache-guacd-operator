@@ -55,6 +55,6 @@ juju add-model test-guacd
 # Enable DEBUG logging
 juju model-config logging-config="<root>=INFO;unit=DEBUG"
 # Deploy the charm
-juju deploy ./davigar15-apache-guacd_ubuntu-20.04-amd64.charm \
+juju deploy ./apache-guacd_ubuntu-20.04-amd64.charm \
   --resource guacd-image=guacamole/guacd:1.3.0
 ```

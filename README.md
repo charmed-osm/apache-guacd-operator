@@ -8,11 +8,11 @@ See LICENSE file for licensing details. -->
 [![Run-Tests](https://github.com/davigar15/charm-apache-guacd/actions/workflows/ci.yaml/badge.svg)](https://github.com/davigar15/charm-apache-guacd/actions/workflows/ci.yaml)
 
 
-[![Apache Guacd](https://charmhub.io/davigar15-apache-guacd/badge.svg)](https://charmhub.io/davigar15-apache-guacd)
+[![Apache Guacd](https://charmhub.io/apache-guacd/badge.svg)](https://charmhub.io/apache-guacd)
 
 ## Description
 
-The native server-side proxy used by [Apache Guacamole](https://charmhub.io/davigar15-apache-guacamole).
+The native server-side proxy used by [Apache Guacamole](https://charmhub.io/apache-guacamole).
 
 Guacd is the native server-side proxy used by the Apache Guacamole web application. If you wish to deploy Guacamole, or an application using the Guacamole core APIs, you will need a copy of guacd running.
 
@@ -22,7 +22,7 @@ The Apache Guacd Operator may be deployed using the Juju command line as in
 
 ```shell
 $ juju add-model apache-guacd
-$ juju deploy davigar15-apache-guacd --channel edge
+$ juju deploy apache-guacd
 ```
 
 ## OCI Images

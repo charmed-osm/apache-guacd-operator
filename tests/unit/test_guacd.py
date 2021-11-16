@@ -4,7 +4,7 @@
 from ipaddress import IPv4Address
 
 import pytest
-from charms.davigar15_apache_guacd.v0.guacd import GuacdRequires, pod_ip
+from charms.apache_guacd.v0.guacd import GuacdRequires, pod_ip
 from pytest_mock import MockerFixture
 
 
@@ -46,7 +46,7 @@ def test_requires(mocker: MockerFixture, requires: GuacdRequires):
 
 
 def test_pod_ip(mocker: MockerFixture):
-    socket_mock = mocker.patch("charms.davigar15_apache_guacd.v0.guacd.socket")
+    socket_mock = mocker.patch("charms.apache_guacd.v0.guacd.socket")
     socket_mock.getfqdn.return_value = "host"
     socket_mock.gethostbyname.return_value = "1.1.1.1"
     assert pod_ip() == IPv4Address("1.1.1.1")

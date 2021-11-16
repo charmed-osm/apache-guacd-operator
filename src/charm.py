@@ -6,7 +6,7 @@
 
 import logging
 
-from charms.davigar15_apache_guacd.v0 import guacd
+from charms.apache_guacd.v0 import guacd
 from ops.charm import CharmBase, ConfigChangedEvent, WorkloadEvent
 from ops.framework import StoredState
 from ops.main import main
